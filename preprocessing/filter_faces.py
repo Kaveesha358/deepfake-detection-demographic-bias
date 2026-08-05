@@ -1,13 +1,3 @@
-# Search Directories
-
-import os
-for dirname, _, filenames in os.walk('/kaggle/input'):
-    print(dirname)
-
-# Install Dependencies
-
-!pip install deepface
-
 # Filter Images
 
 from deepface import DeepFace

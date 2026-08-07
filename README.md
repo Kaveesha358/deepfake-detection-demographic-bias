@@ -3,8 +3,8 @@
 This repository houses the formal research methodology, algorithmic preprocessing pipelines, and system architecture framework for **IT41043 — Intelligent Systems (Milestone 2)**. This project investigates the automated detection of authentic versus artificially generated (deepfake) facial imagery by implementing a carefully curated dataset subset alongside an advanced dual-branch detection framework.
 
 
-**Module:** IT41043 — Intelligent Systems | Horizon Campus, Faculty of Information Technology
-**Group:** ITBIN-2313-0020 (S.M.K. Sewwandi De Silva) & ITBIN-2313-0125 (H.C. Jayangi Wickramarathna)
+# **Module:** IT41043 — Intelligent Systems | Horizon Campus, Faculty of Information Technology
+# **Group:** ITBIN-2313-0020 (S.M.K. Sewwandi De Silva) & ITBIN-2313-0125 (H.C. Jayangi Wickramarathna)
 
 
 

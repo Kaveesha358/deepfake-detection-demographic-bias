@@ -4,7 +4,7 @@ This repository houses the formal research methodology, algorithmic preprocessin
 
 
 **Module:** IT41043 — Intelligent Systems | Horizon Campus, Faculty of Information Technology
-**Group:** ITBIN-2313-0020 (S.M.K. Sewwandi De Silva) & ITBIN-2313-0125 (H.C. Jayangi Wickramarathna)
+- **Group:** ITBIN-2313-0020 (S.M.K. Sewwandi De Silva) & ITBIN-2313-0125 (H.C. Jayangi Wickramarathna)
 
 
 
@@ -14,21 +14,21 @@ This project investigates whether a hybrid facial forgery detection model — co
 
 ## Repository Structure
 
-├── annotation/
-│ ├── annotation_sample.txt # 100 filenames used for manual demographic annotation
-│ └── annotation_results.md # Cohen's Kappa results and interpretation
-├── models/
-│ ├── model.py # DualBranchDeepfakeDetector (proposed hybrid model)
-│ └── baseline_model.py # SingleBranchBaseline (Branch A only)
-├── notebooks/
-│ └── deepfakedetect (2).ipynb # Full pipeline: filtering, preprocessing, models, evaluation
-├── preprocessing/
-│ ├── filter_faces.py # DeepFace-based demographic (Asian-subset) filtering
-│ ├── eye_extractor.py # MTCNN-based eye-region extraction (Branch B input)
-│ └── pipeline.py # Combined face-crop + compression + blur preprocessing
-├── evaluation.py # Stratified 5-fold CV, F1-score, AUC-ROC, paired t-test
-├── requirements.txt
-└── README.md
+    annotation/
+        annotation_results.md     - Cohen's Kappa results and interpretation
+        annotation_sample.txt     - 100 filenames used for manual demographic annotation
+    models/
+        baseline_model.py         - SingleBranchBaseline (Branch A only)
+        model.py                  - DualBranchDeepfakeDetector (proposed hybrid model)
+    notebooks/
+        deepfakedetect.ipynb      - Full pipeline: filtering, preprocessing, models, evaluation
+    preprocessing/
+        eye_extractor.py          - MTCNN-based eye-region extraction (Branch B input)
+        filter_faces.py           - DeepFace-based demographic (Asian-subset) filtering
+        pipeline.py                - Combined face-crop + compression + blur preprocessing
+    evaluation.py                 - Stratified 5-fold CV, F1-score, AUC-ROC, paired t-test
+    requirements.txt
+    README.md
 
 
 ## Current Status (Milestone 2)

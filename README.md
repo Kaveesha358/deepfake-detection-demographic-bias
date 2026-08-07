@@ -1,45 +1,74 @@
-# DeepDetect-2025: Intelligent System for Deepfake Detection
+# Hybrid Deepfake Detection with Biological Eye-Feature Analysis
 
 This repository houses the formal research methodology, algorithmic preprocessing pipelines, and system architecture framework for **IT41043 — Intelligent Systems (Milestone 2)**. This project investigates the automated detection of authentic versus artificially generated (deepfake) facial imagery by implementing a carefully curated dataset subset alongside an advanced dual-branch detection framework.
 
 
-## 🚀 Project Overview
-
-* **Objective:** To develop a highly accurate and explainable intelligent system capable of distinguishing between real and digitally manipulated (deepfake) facial images using the `deepdetect-2025` dataset.
-* **The Research Gap:** Traditional deepfake detectors often act as "black boxes," providing probability scores without justification. This project directly addresses this limitation by emphasizing model transparency and human-interpretable evidence.
-* **Core Architecture:** The system leverages a novel **dual-branch architecture**:
-  * **Branch A (Deep Features):** A fine-tuned Xception CNN extracts global manipulation artifacts, such as blending boundaries and texture flaws across the face.
-  * **Branch B (Biological Features):** A biological eye-feature extraction module uses facial landmarks to analyze corneal specular reflections and pupil symmetry, targeting GAN-generated irregularities.
-* **Explainability & Output:** Rather than a simple binary classification, the final output fuses both branches to provide a `Real` or `Fake` decision alongside a **Grad-CAM heatmap** (visual evidence) and a **biological inconsistency score** (numerical evidence).
-* **Data Collection & Bias Mitigation:** Data sourced from the `deepdetect-2025` database is automatically scanned and filtered for specific target demographics using the DeepFace library. This approach is designed to evaluate and mitigate potential racial bias in deepfake detectors[cite: 2].
-* **Dataset Size:** To prevent class imbalances and ensure stable training, the curated dataset is strictly balanced at a 1:1 ratio, consisting of 1,000 authentic and 1,000 synthetic (fake) high-resolution images[cite: 2].
-* **Preprocessing Pipeline:** Prior to feature extraction, raw images undergo an automated preprocessing pipeline that includes face cropping, alignment, standard resizing to $224 \times 224$ pixels, and RGB pixel-value normalization to $[0, 1]$ to optimize gradient convergence[cite: 2].
-
-* ## 📂 Folder Hierarchy 
+**Module:** IT41043 — Intelligent Systems | Horizon Campus, Faculty of Information Technology
+**Group:** ITBIN-2313-0020 (S.M.K. Sewwandi De Silva) & ITBIN-2313-0125 (H.C. Jayangi Wickramarathna)
 
 
-```text
-deepdetect-2025/
-│
-├── data/
-│   ├── filtered_real/     
-│   └── filtered_fake/      
-│
+
+## Project Overview
+
+This project investigates whether a hybrid facial forgery detection model — combining conventional deep-learning-based feature extraction with biologically grounded eye-region analysis (corneal specular highlight symmetry and pupil-shape regularity) — can achieve both higher transparency and comparable or improved accuracy relative to standard "black box" CNN-based deepfake detectors, when applied to highly compressed, low-resolution GAN-generated images typical of South Asian social media platforms.
+
+## Repository Structure
+
+├── annotation/
+│ ├── annotation_sample.txt # 100 filenames used for manual demographic annotation
+│ └── annotation_results.md # Cohen's Kappa results and interpretation
+├── models/
+│ ├── model.py # DualBranchDeepfakeDetector (proposed hybrid model)
+│ └── baseline_model.py # SingleBranchBaseline (Branch A only)
+├── notebooks/
+│ └── deepfakedetect (2).ipynb # Full pipeline: filtering, preprocessing, models, evaluation
 ├── preprocessing/
-│   ├── filter_faces.py      
-│
-├── notebooks      
-├── requirements.txt       
+│ ├── filter_faces.py # DeepFace-based demographic (Asian-subset) filtering
+│ ├── eye_extractor.py # MTCNN-based eye-region extraction (Branch B input)
+│ └── pipeline.py # Combined face-crop + compression + blur preprocessing
+├── evaluation.py # Stratified 5-fold CV, F1-score, AUC-ROC, paired t-test
+├── requirements.txt
 └── README.md
+
+
+## Current Status (Milestone 2)
+
+- [x] Research gap, question, and scope finalised (Milestone 1)
+- [x] Dataset sourced and filtered (DeepFace demographic pre-filter on DeepDetect-2025 corpus, 500 real + 500 fake images)
+- [x] Manual annotation completed — 100-image sample independently labelled by both researchers; Cohen's Kappa = 0.485 (moderate agreement)
+- [x] Face detection & cropping implemented (MTCNN)
+- [x] Compression simulation implemented (JPEG re-compression + Gaussian blur)
+- [x] Eye-region extraction implemented (MTCNN keypoints — Branch B input)
+- [x] Model architecture implemented and documented (dual-branch: EfficientNet-B0 + ResNet-18 fusion)
+- [x] Baseline implemented (single-branch EfficientNet-B0)
+- [x] Evaluation pipeline implemented (stratified 5-fold CV, F1-score, AUC-ROC, paired t-test)
+- [ ] Model training and full-scale experimentation (Milestone 3)
+- [ ] Results analysis and final report (Milestone 4)
+
+## Dataset
+
+Source pool: `ayushmandatta1/deepdetect-2025` (Kaggle). A demographic pre-filter using the DeepFace ethnicity classifier narrowed the pool to images classified under the "Asian" category, followed by manual review to confirm South Asian-adjacent relevance. See `annotation/annotation_results.md` for the full annotation methodology and inter-annotator agreement results.
+
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Kaveesha358/deepfake-detection-demographic-bias.git
+cd deepfake-detection-demographic-bias
 ```
 
----
+Install dependencies:
 
-## ⚙️ Setup & Execution Guidelines
+```bash
+pip install -r requirements.txt
+```
 
-To run this project on your local machine or within the Kaggle environment, follow these steps:
+The full pipeline (dataset filtering → annotation → preprocessing → model definitions → evaluation setup) is implemented in `notebooks/deepfakedetect (2).ipynb`, developed and run on Kaggle Notebooks using the `ayushmandatta1/deepdetect-2025` dataset as input. To reproduce:
 
-1. **Clone the Repository:**
-   ```bash
-   git clone [https://github.com/your-username/deepdetect-2025.git](https://github.com/your-username/deepdetect-2025.git)
-   cd deepdetect-2025
+1. Open the notebook in Kaggle Notebooks (or Jupyter, with the source dataset available locally).
+2. Run all cells in order — this performs demographic filtering, face detection/cropping, compression simulation, eye-region extraction, and defines the model, baseline, and evaluation functions.
+
+## License
+
+Academic project — Horizon Campus, IT41043, Academic Year 2026.

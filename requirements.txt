@@ -1,4 +1,16 @@
-deepface
-opencv-python
-pandas
+# Environment: Kaggle Notebooks, Python 3.12, NVIDIA Tesla T4 (2026)
+# Pinned versions observed in the run log:
+mtcnn==1.0.0
+joblib==1.5.3
+lz4==4.4.5
+torch
+torchvision
+timm
 numpy
+pandas
+scikit-learn
+scipy
+opencv-python
+deepface
+matplotlib
+tensorflow
